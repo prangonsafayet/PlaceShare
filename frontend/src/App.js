@@ -1,14 +1,19 @@
-import React from 'react';
-import {BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  Switch,
+} from "react-router-dom";
 
-import Users from './user/pages/Users';
-import NewPlace from './places/pages/NewPlace';
-import MainNavigation from './shared/components/Navigation/MainNavigation';
-
+import Users from "./user/pages/Users";
+import NewPlace from "./places/pages/NewPlace";
+import MainNavigation from "./shared/components/Navigation/MainNavigation";
+import UserPlaces from "./places/pages/UserPlaces";
 
 // color pallette: https://coolors.co/011627-f71735-41ead4-fdfffc-ff9f1c
 const App = () => {
-  return(
+  return (
     <Router>
       <MainNavigation />
       <main>
@@ -16,14 +21,17 @@ const App = () => {
           <Route path="/" exact>
             <Users />
           </Route>
+          <Route path="/:userId/places" exact>
+            <UserPlaces />
+          </Route>
           <Route path="/places/new" exact>
             <NewPlace />
           </Route>
-          <Redirect to="/"/>
-        </Switch> 
+          <Redirect to="/" />
+        </Switch>
       </main>
     </Router>
   );
-}
+};
 
 export default App;
