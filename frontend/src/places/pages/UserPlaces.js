@@ -14,7 +14,8 @@ const DUMMY_PLACES = [
       lat: 40.7484405,
       lng: -73.9878531,
     },
-    creator:'u1'
+    creator:'u1',
+    description:"Skyscraper GG"
   },
   {
     id: "p2",
@@ -26,7 +27,8 @@ const DUMMY_PLACES = [
       lat: 40.7484405,
       lng: -73.9878531,
     },
-    creator:'u2'
+    creator:'u2',
+    description:"Skyscraper GG"
   },
 ];
 
