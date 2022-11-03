@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import Input from "../../shared/components/FormElements/Input";
@@ -24,7 +24,7 @@ const DUMMY_PLACES = [
       lng: -73.9878531,
     },
     creator: "u1",
-    description:"Skyscraper GG"
+    description: "Skyscraper GG",
   },
   {
     id: "p2",
@@ -37,35 +37,57 @@ const DUMMY_PLACES = [
       lng: -73.9878531,
     },
     creator: "u2",
-    description:"Skyscraper GG"
+    description: "Skyscraper GG",
   },
 ];
 
 const UpdatePlace = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const placeId = useParams().placeId;
 
-  const identifiedPlace = DUMMY_PLACES.find((p) => p.id === placeId);
-  const [formState, inputHandler] = useForm(
+  const [formState, inputHandler, setFormData] = useForm(
     {
       title: {
-        value: identifiedPlace.title,
-        isValid: true,
+        value: "",
+        isValid: false,
       },
       description: {
-        value: identifiedPlace.description,
-        isValid: true,
+        value: "",
+        isValid: false,
       },
     },
-    true
+    false
   );
+  const identifiedPlace = DUMMY_PLACES.find((p) => p.id === placeId);
+  useEffect(() => {
+    setFormData(
+      {
+        title: {
+          value: identifiedPlace.title,
+          isValid: true,
+        },
+        description: {
+          value: identifiedPlace.description,
+          isValid: true,
+        },
+      },
+      true
+    );
+    setIsLoading(false);
+  }, [setFormData, identifiedPlace]);
 
+  
+
+  const placeUpdateSubmitHandler = (event) => {
+    event.preventDefault();
+    console.log(formState.inputs);
+  };
   if (!identifiedPlace) {
     return <div className="center">Could not find place</div>;
   }
-
-  const placeUpdateSubmitHandler = event =>{
-      event.preventDefault();
-      console.log(formState.inputs)
+  if (isLoading) {
+    
+    return <div className="center">Loading...</div>;
   }
 
   return (
@@ -95,6 +117,7 @@ const UpdatePlace = () => {
         Update Place
       </Button>
     </form>
+  
   );
 };
 
