@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Helmet } from "react-helmet-async";
 import UsersList from "../components/UsersList";
 
 const Users = () => {
@@ -11,7 +11,18 @@ const Users = () => {
       places: 3,
     },
   ];
-  return <UsersList items={USERS} />;
+  return (
+    <React.Fragment>
+      <Helmet>
+        <title>PlaceShare</title>
+        <meta
+          name="description"
+          content="Placeshare app"
+        />
+      </Helmet>
+      <UsersList items={USERS} />
+    </React.Fragment>
+  );
 };
 
 export default Users;
